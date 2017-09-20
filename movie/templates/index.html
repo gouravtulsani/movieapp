@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movies</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="{% static 'js/main.js' %}"></script>
+</head>
+<body><br>
+<div class="container">
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+
+        <!-- Header -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand nav-pills active " href="{% url 'movie:index' %}">Movies&nbsp;&nbsp;&nbsp;</a>
+            <a class="navbar-brand glyphicon glyphicon-plus" href="{% url 'movie:add_movie' %}">Add&nbsp;&nbsp;&nbsp;</a>
+        
+        </div>
+
+        <!-- Items -->
+        
+        
+
+    </div>
+  </nav><br><br><br>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Movie</th>
+        <th>Time</th>
+        <th>Location</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for movie in movies %}
+      <tr>
+        <td>{{ movie.movie_name }}</td>
+        <td>{{ movie.release_date }}</td>
+        <td>{{ movie.location }}</td>
+        
+        <td>
+            <form action="{% url 'movie:update-movie' movie.id %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            <input type="hidden" name="movie_id" value="{{ movie.id }}" />
+            <button type="submit" class="btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+            </form>
+        </td>   
+        
+        <td><form action="{% url 'movie:delete_movie' movie.id %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            <input type="hidden" name="movie_id" value="{{ movie.id }}" />
+            <button type="submit" class="btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-trash"></span>
+            </button>
+            </form>
+        </td>
+      </tr>
+      {% endfor %}  
+      </tbody>
+  </table>
+</div>
+
+</body>
+</html>
+
+
+<!-- Favorite Album -->

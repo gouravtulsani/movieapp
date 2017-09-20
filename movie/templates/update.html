@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movies</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="{% static 'js/main.js' %}"></script>
+</head>
+<body><br>
+<div class="container">
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+
+        <!-- Header -->
+        <div class="navbar-header ">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand nav-pills active " href="{% url 'movie:index' %}">Movies&nbsp;&nbsp;&nbsp;</a>
+            <a class="navbar-brand glyphicon glyphicon-plus" href="{% url 'movie:add_movie' %}">Add&nbsp;&nbsp;&nbsp;</a>
+        
+        </div>
+
+        <!-- Items -->
+        
+        
+
+    </div>
+</nav>
+    <div class="col-sm-12 col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>Add a New Movie</h3><br>
+
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+                    <form action="" method="post">{% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="Update" />
+                </form>
+                </div>
+            </div>
+        </div>
+</body>
+</html>
